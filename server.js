@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+
 var bodyParser = require('body-parser');
 
 import { APP_PORT ,DB_URL } from "./config";
@@ -9,7 +10,7 @@ import routes from './routes';
 
 // DATABASE CONNECTION
 mongoose.connect(DB_URL, {
-    
+   
  });
 const db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error:'))
