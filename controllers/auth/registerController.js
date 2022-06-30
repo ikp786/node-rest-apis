@@ -52,7 +52,7 @@ const registerController = {
     let access_token;
     try {
       const result = await user.save();
-      console.log(result);
+      // console.log(result);
       //  CREATE JWT TOKEN
 
       access_token = JwtService.sign({ _id: result._id, role: result.role });
