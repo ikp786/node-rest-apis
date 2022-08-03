@@ -7,7 +7,7 @@ import { REFRESH_SECRET } from "../../config";
 
 
 const refreshController = {
-
+// validation
   async refresh(req,res,next){
     const refreshSchema = Joi.object({
       refresh_token: Joi.string().required(),      
