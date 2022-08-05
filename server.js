@@ -2,12 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 var bodyParser = require('body-parser');
-
+import multer from "multer";
 import { APP_PORT ,DB_URL } from "./config";
 import errorHandler from "./middlewares/errorHandler";
 const app = express()
 import routes from './routes';
-
+var upload = multer();
 // DATABASE CONNECTION
 mongoose.connect(DB_URL, {
    
@@ -20,6 +20,11 @@ db.once('open', () => {
 
 global.appRoot = path.resolve(__dirname);
 app.use(express.urlencoded({extended:false}));
+
+// for parsing multipart/form-data
+// app.use(upload.array()); 
+// app.use(express.static('public'));
+app.use('/uploads',express.static('uploads'));
 
 app.use(express.json());
 app.use('/api', routes);
