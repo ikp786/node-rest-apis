@@ -7,7 +7,6 @@ const errorHandler = (err, req, res, next) => {
         message: "Iternal Server error",
         ...(DEBUG_MODE === 'true' && { originalError: err.message })
     }
-
     if (err instanceof ValidationError) {
         statsCode = 422;
         data = {
@@ -20,10 +19,6 @@ const errorHandler = (err, req, res, next) => {
             message: err.message
         }
     }
-
     return res.status(statsCode).json(data);
-
 }
-
-
 export default errorHandler;

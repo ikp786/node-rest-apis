@@ -60,7 +60,7 @@ app.get('/payment',async(req,res) =>{
           cvc: '314',
         },
       });   
-        //   console.log(token);
+          console.log(token);
       await stripe.customers.create({
           email:'khan@gmail.com',
           source:token.id,
@@ -73,17 +73,17 @@ app.get('/payment',async(req,res) =>{
               country:'India'
           }
       })
-      .then((customer) => {
+      .then((custmer) => {
           return stripe.charges.create({ 
               amount:7000,
               description:'web developer',
               currency:'USD',
-              customer:customer.id
+              custmer:custmer.id
           })
       })
       .then((charge) => {
           console.log(charge);
-          res.send(charge);
+          res.send(Success);
       })
       .catch((err) => {
           res.send(err)
@@ -94,7 +94,15 @@ app.get('/payment',async(req,res) =>{
     });
 
 app.post('/payment', async(req,res) => {
-   
+    // const token = await stripe.tokens.create({
+    //   card: {
+    //     number: '4242424242424242',
+    //     exp_month: 8,
+    //     exp_year: 2023,
+    //     cvc: '314',
+    //   },
+    // });   
+        console.log(req.body);
     await stripe.customers.create({
         email:req.body.stripeEmail,
         source:req.body.stripeToken,
@@ -107,17 +115,17 @@ app.post('/payment', async(req,res) => {
             country:'India'
         }
     })
-    .then((customer) => {
+    .then((custmer) => {
         return stripe.charges.create({ 
             amount:7000,
             description:'web developer',
             currency:'USD',
-            customer:customer.id
+            custmer:custmer.id
         })
     })
     .then((charge) => {
         console.log(charge);
-        res.send(charge);
+        res.send(Success);
     })
     .catch((err) => {
         res.send(err)
